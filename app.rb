@@ -2,7 +2,7 @@ require 'sinatra'
 
 class Servers
     include Mongoid::Document
-    field :server_name, type :String
+    field :server_name, type: String
     field :uri, type: String
     field :creation_date, type: Date
     field :last_reset, type: Date
@@ -10,9 +10,9 @@ class Servers
 end
 
 class API_Key
-    include Mongo::Document
-    field :user, type String
-    field :key, type String
+    include Mongoid::Document
+    field :user, type: String
+    field :key, type: String
 end
 
 post '/set/:server' do
@@ -21,7 +21,7 @@ end
 
 get '/get/:server' do
     server = Servers.where(server_name: :server)
-    if server.empty? do
+    if server.empty?
         "BOOOOO IT WORKS"
     end
 end
