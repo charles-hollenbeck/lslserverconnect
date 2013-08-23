@@ -1,4 +1,8 @@
 require 'sinatra'
+require 'mongoid'
+
+Mongoid.load!("mongoid.yml")
+
 
 class Servers
     include Mongoid::Document
