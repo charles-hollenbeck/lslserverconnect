@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'mongoid'
 
-Mongoid.load!("mongoid.yml")
+Mongoid.load!("mongoid.yml", :developement)
 
 
 class Servers
