@@ -16,7 +16,7 @@ class User
     include Mongoid::Document
     field :user, type: String
     field :key, type: String
-    field :limit, type Integer
+    field :limit, type: Integer
 end
 
 post '/:action/:server' do #Available actions: get, set, delete
@@ -30,7 +30,7 @@ post '/:action/:server' do #Available actions: get, set, delete
             "Invalid API Key"
         else
             server = Servers.where(server_name: :server, user: client.user).first
-            date = Time.strftime("%%B %%d, %%Y")
+            date = Time.strftime("%%B %%d, %%Y") #Example Date Output: August 24th, 2013
 
             if server.empty?
                 "No Server found under the name, #{:server} for user: #{client.user}, creating a new one if possible"
