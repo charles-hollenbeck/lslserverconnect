@@ -47,20 +47,22 @@ post '/:action/:server' do #Available actions: get, set, delete
                 else
                     "Server amount limit reached, please delete a server to make room"
                 end
-            case :action
-                when "get"
-                    server.uri
-                when "set"
-                    new_uri = params[:new_uri]
-                    if new_uri.empty?
-                        "Missing new_uri param"
+            else
+                case :action
+                    when "get"
+                        server.uri
+                    when "set"
+                        new_uri = params[:new_uri]
+                        if new_uri.empty?
+                            "Missing new_uri param"
+                        else
+                            server.update(uri: new_uri, last_reset: date)
+                        end
+                    when "delete"
+                        server.delete
                     else
-                        server.update(uri: new_uri, last_reset: date)
-                    end
-                when "delete"
-                    server.delete
-                else
-                    "Unknown action #{:action}"
+                        "Unknown action #{:action}"
+                end
             end
         end
     end
