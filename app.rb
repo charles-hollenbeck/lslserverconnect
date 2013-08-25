@@ -16,7 +16,7 @@ class User
     include Mongoid::Document
     field :user, type: String
     field :key, type: String
-    field :limit, type: Integer
+    field :limit, type: Integer #0 = Infinit
 end
 
 post '/:action/:server' do #Available actions: get, set, delete
@@ -35,7 +35,7 @@ post '/:action/:server' do #Available actions: get, set, delete
             if server.empty?
                 "No Server found under the name, #{:server} for user: #{client.user}, creating a new one if possible"
 
-                if client.limit < Servers.where(user: client.user).count
+                if client.limit < Servers.where(user: client.user).count || client.limit == 0
                     new_uri = params[:new_uri]
 
                     if new_uri.empty?
